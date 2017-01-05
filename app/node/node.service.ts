@@ -11,9 +11,14 @@ import { Logger } from 'angular2-logger/core';
 export class NodeService {
 
 	constructor( @Inject(APP_CONFIG) private config: IAppConfig, private http: Http, private route: ActivatedRoute, private _logger: Logger) { }
-
+	id: string;
+	private getUrlId() {
+		this.id = this.route.snapshot.params['id'];
+	}
 	getNode(): Observable<Node[]> {
-		let url: string = this.config.apiEndpoint + 'careers?_format=json';
+		this.getUrlId();
+		this._logger.log(this.id);
+		let url: string = this.config.apiEndpoint + 'node/' + this.id + '?_format=json';
 		let headers = new Headers({ 'Content-Type': '*', 'Accept': 'application/json' });
 
 		return this.http.get(url, headers)
@@ -21,8 +26,8 @@ export class NodeService {
 			.catch(this.handleError);
 	}
 	private extractData(res: Response) {
-		let body = res.json();
-		return body.data || {};
+		let node = res.json();
+		return node || {};
 	}
 	private handleError(error: Response | any) {
 		// In a real world app, we might use a remote logging infrastructure
