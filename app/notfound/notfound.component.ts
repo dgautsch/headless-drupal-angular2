@@ -11,7 +11,9 @@ import { Location, LocationStrategy, PathLocationStrategy } from '@angular/commo
 export class NotFoundComponent {
 	title = 'Oops... We Couldn\'t Find What You Were Looking For';
 	location: Location;
-	constructor(location: Location) {}
+	constructor(location: Location) {
+
+	}
 	goBack() {
 		console.log(location);
 	}

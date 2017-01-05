@@ -1,11 +1,28 @@
 import { Component, OnInit } from '@angular/core';
+import { Node } from './node';
+import { NodeService } from './node.service';
+import { Logger } from 'angular2-logger/core';
+
 
 @Component({
 	selector: 'node',
 	templateUrl: '/app/node/node.template.html',
+	providers: [ NodeService ]
 })
 
-export class NodeComponent {
-	title = 'Page Title';
-	content = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pulvinar auctor turpis eget egestas. Aliquam vitae dapibus magna. In eget consequat libero. Suspendisse elementum vel nisl ac congue. Nullam ornare lorem et ex ultrices, id consequat urna vehicula. Sed hendrerit vehicula porttitor. Quisque non dui dignissim, dignissim justo tempus, condimentum nunc. Pellentesque luctus nunc vitae leo dignissim facilisis. Vivamus dolor enim, placerat sed ullamcorper eget, imperdiet et augue.'
+export class NodeComponent implements OnInit {
+	node: Node[];
+
+	constructor( private nodeService: NodeService, private _logger: Logger ) { }
+
+	getNode(): void {
+		this.nodeService.getNode().subscribe(
+			node => this.node = node
+		);
+	}
+
+	ngOnInit(): void {
+		this.getNode();
+	}
+
 }
