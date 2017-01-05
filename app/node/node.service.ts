@@ -1,6 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
-import { ActivatedRoute } from '@angular/router';
 
 import { APP_CONFIG, IAppConfig } from '../app.config';
 import { Node } from './node';
@@ -10,15 +9,10 @@ import { Logger } from 'angular2-logger/core';
 @Injectable()
 export class NodeService {
 
-	constructor( @Inject(APP_CONFIG) private config: IAppConfig, private http: Http, private route: ActivatedRoute, private _logger: Logger) { }
-	id: string;
-	private getUrlId() {
-		this.id = this.route.snapshot.params['id'];
-	}
-	getNode(): Observable<Node[]> {
-		this.getUrlId();
-		this._logger.log(this.id);
-		let url: string = this.config.apiEndpoint + 'node/' + this.id + '?_format=json';
+	constructor( @Inject(APP_CONFIG) private config: IAppConfig, private http: Http, private _logger: Logger) { }
+
+	getNode(urlId: string): Observable<Node[]> {
+		let url: string = this.config.apiEndpoint + 'node/' + urlId + '?_format=json';
 		let headers = new Headers({ 'Content-Type': '*', 'Accept': 'application/json' });
 
 		return this.http.get(url, headers)
