@@ -1,4 +1,4 @@
-<section class="node row">
-	<h1 class="display-3">{{node?.title[0].value}}</h1>
-	<div class="node-content" [innerHTML]="node?.body[0].value"></div>
+<section class="node row" *ngIf="node">
+	<h1 class="display-3">{{node.title[0].value}}</h1>
+	<div class="node-content" [innerHTML]="node.body[0].value"></div>
 </section>

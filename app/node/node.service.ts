@@ -11,8 +11,14 @@ export class NodeService {
 
 	constructor( @Inject(APP_CONFIG) private config: IAppConfig, private http: Http, private _logger: Logger) { }
 
-	getNode(urlId: string): Observable<Node[]> {
-		let url: string = this.config.apiEndpoint + 'node/' + urlId + '?_format=json';
+	getNode(urlId: any): Observable<Node[]> {
+		let url: string;
+		let id = Number(urlId);
+		if ( isNaN(id) ) {
+			url = this.config.apiEndpoint + urlId + '?_format=json';
+		} else {
+			url = this.config.apiEndpoint + 'node/' + urlId + '?_format=json';
+		}
 		let headers = new Headers({ 'Content-Type': '*', 'Accept': 'application/json' });
 
 		return this.http.get(url, headers)
@@ -21,10 +27,9 @@ export class NodeService {
 	}
 	private extractData(res: Response) {
 		let node = res.json();
-		return node || {};
+		return node || { };
 	}
 	private handleError(error: Response | any) {
-		// In a real world app, we might use a remote logging infrastructure
 		let errMsg: string;
 		if (error instanceof Response) {
 			const body = error.json() || '';

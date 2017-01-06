@@ -17,7 +17,6 @@ export class NodeComponent implements OnInit {
 	constructor( private nodeService: NodeService, private _logger: Logger, private route: ActivatedRoute, ) { }
 
 	getNode(id: string) {
-		this._logger.log(id);
 		this.nodeService.getNode(id).subscribe(
 			node => this.node = node
 		);
