@@ -14,7 +14,9 @@ export class NavigationComponent implements OnInit {
 	constructor(private navigationService: NavigationService) { }
 
 	getNav(): void {
-		this.navigationService.getNavigation().then(navItems => this.navItems = navItems);
+		this.navigationService.getNavigation().subscribe(
+			navItems => this.navItems = navItems
+		);
 	}
 
 	ngOnInit(): void {

@@ -9,11 +9,13 @@ import { Logger } from 'angular2-logger/core';
 import { LOG_LOGGER_PROVIDERS } from 'angular2-logger/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NavigationComponent } from './navigation/navigation.component';
+import { BlogComponent } from './blog/blog.component';
 import { NodeComponent } from './node/node.component';
 import { NotFoundComponent } from './notfound/notfound.component';
 
 
 const appRoutes: Routes = [
+	{ path: 'blog', component: BlogComponent },
 	{ path: ':id', component: NodeComponent },
 	{ path: 'node/:id', component: NodeComponent },
 	{ path: '', component: NodeComponent },
@@ -27,7 +29,13 @@ const appRoutes: Routes = [
 		HttpModule,
 		JsonpModule,
 	],
-	declarations: [AppComponent, NavigationComponent, NodeComponent, NotFoundComponent],
+	declarations: [
+		AppComponent,
+		NavigationComponent,
+		BlogComponent,
+		NodeComponent,
+		NotFoundComponent
+	],
 	bootstrap: [AppComponent],
 	providers: [LOG_LOGGER_PROVIDERS, { provide: APP_CONFIG, useValue: AppConfig }]
 })

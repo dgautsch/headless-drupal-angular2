@@ -1,0 +1,7 @@
+<div class="blogroll">
+	<section class="blog-article" *ngFor="let blogItem of blog">
+		<h2>{{blogItem.title[0].value}}</h2>
+		<div class="blog-article--body" [innerHtml]="blogItem.body[0].value"></div>
+		<hr>
+	</section>
+</div>
