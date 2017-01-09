@@ -1,6 +1,9 @@
 <div class="blogroll">
+	<h1 class="display-2">Think Blog</h1>
+	<hr>
 	<section class="blog-article" *ngFor="let blogItem of blog">
-		<h2>{{blogItem.title[0].value}}</h2>
+		<h2 class="display-4">{{blogItem.title[0].value}}</h2>
+		<span><strong>Posted:</strong> {{blogItem.changed[0].value | date: 'dd/MM/yyyy'}}</span>
 		<div class="blog-article--body" [innerHtml]="blogItem.body[0].value"></div>
 		<hr>
 	</section>
